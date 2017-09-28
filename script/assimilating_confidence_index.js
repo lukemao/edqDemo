@@ -114,42 +114,42 @@ function getCell(row, col) {
     // rows and columns start at 0
     pquery = pobjects.get(0);
     colCount = pquery.getColumnCount();
-    if (col == colCount) {
+    if (col == -1) {
         return getManufacturedCell(row, col);
     } else {
 		if(col == 0){
-			if(row == 0) return 'less than 20';
-			if(row == 1) return '21-40';
-			if(row == 2) return '41-60';
-			if(row == 3) return '61-80';
-			if(row == 4) return '81 above';
+			if(row == 0) return 'less than 10';
+			if(row == 1) return '11-20';
+			if(row == 2) return '21-30';
+			if(row == 3) return '31-40';
+			if(row == 4) return '41-50';
 			if(row == 5) return 'total';
 		}
 		// SQL: Select ages from TABLE where APPROVAL='Y' && age>0 && age<20
 		if(col == 1){
-			if(row == 0) return getAge(0,  20,  'y');
-			if(row == 1) return getAge(21, 40,  'y');
-			if(row == 2) return getAge(41, 60,  'y');
-			if(row == 3) return getAge(61, 80,  'y');
-			if(row == 4) return getAge(81, 100, 'y');
-			if(row == 5) return getAge(0,  100, 'y');
+			if(row == 0) return getAge(0,  10,  'y');
+			if(row == 1) return getAge(11, 20,  'y');
+			if(row == 2) return getAge(41, 30,  'y');
+			if(row == 3) return getAge(31, 40,  'y');
+			if(row == 4) return getAge(41, 50, 'y');
+			if(row == 5) return getAge(0,  50, 'y');
 		}
 		if(col == 2){
-			if(row == 0) return getAge(0,  20,  'n');
-			if(row == 1) return getAge(21, 40,  'n');
-			if(row == 2) return getAge(41, 60,  'n');
-			if(row == 3) return getAge(61, 80,  'n');
-			if(row == 4) return getAge(81, 100, 'n');
-			if(row == 5) return getAge(0,  100, 'n');
+			if(row == 0) return getAge(0,  10,  'n');
+			if(row == 1) return getAge(11, 20,  'n');
+			if(row == 2) return getAge(21, 30,  'n');
+			if(row == 3) return getAge(31, 40,  'n');
+			if(row == 4) return getAge(41, 50, 'n');
+			if(row == 5) return getAge(0,  50, 'n');
 		}
 		if(col == 3){
 			prior =  0.5;
 			priorInv = getAge(0,  100,  'n') / (getAge(0,  100,  'n') + getAge(0,  100,  'y'));
-			if(row == 0) return assimilatingAge(0, 20, 0.5);
-			if(row == 1) return assimilatingAge(21, 40, 0.5);
-			if(row == 2) return assimilatingAge(41, 60, 0.5);
-			if(row == 3) return assimilatingAge(61, 80, 0.5);
-			if(row == 4) return assimilatingAge(81, 100, 0.5);
+			if(row == 0) return assimilatingAge(0, 10, 0.5);
+			if(row == 1) return assimilatingAge(11, 20, 0.5);
+			if(row == 2) return assimilatingAge(21, 30, 0.5);
+			if(row == 3) return assimilatingAge(31, 40, 0.5);
+			if(row == 4) return assimilatingAge(41, 50, 0.5);
 			if(row == 5) return '-';
 			return likelihood.toFixed(2);
 		}
@@ -181,31 +181,31 @@ function getCell(row, col) {
 		if(col == 7){
 			priorInv = getDebt(0,  20,  'n') / (getDebt(0,  20,  'n') + getDebt(0,  20,  'y'));
 			if(row == 0) {
-			    prior =  assimilatingAge(0, 20, 0.5);
+			    prior =  assimilatingAge(0, 10, 0.5);
 			    priorConditional = getDebt(4,  6,   'y')/getDebt(0,  20,   'y');
 			    priorConditionalInv = getDebt(4,  6,   'n')/getDebt(0,  20,   'n');
 				likelihood = (prior*priorConditional)/(prior*priorConditional + priorInv*priorConditionalInv);
 			}
 			if(row == 1) {
-			    prior =  assimilatingAge(21, 40, 0.5);
+			    prior =  assimilatingAge(11, 20, 0.5);
 			    priorConditional = getDebt(0,  2,   'y')/getDebt(0,  20,   'y');
 			    priorConditionalInv = getDebt(0,  2,   'n')/getDebt(0,  20,   'n');
 				likelihood = (prior*priorConditional)/(prior*priorConditional + priorInv*priorConditionalInv);
 			}
 			if(row == 2) {
-			    prior =  assimilatingAge(41, 60, 0.5);
+			    prior =  assimilatingAge(21, 30, 0.5);
 			    priorConditional = getDebt(8,  10,   'y')/getDebt(0,  20,   'y');
 			    priorConditionalInv = getDebt(8,  10,   'n')/getDebt(0,  20,   'n');
 				likelihood = (prior*priorConditional)/(prior*priorConditional + priorInv*priorConditionalInv);
 			}
 			if(row == 3) {
-			    prior =  assimilatingAge(61, 80, 0.5);
+			    prior =  assimilatingAge(31, 40, 0.5);
 			    priorConditional = getDebt(2,  4,   'y')/getDebt(0,  20,   'y');
 			    priorConditionalInv = getDebt(2,  4,   'n')/getDebt(0,  20,   'n');
 				likelihood = (prior*priorConditional)/(prior*priorConditional + priorInv*priorConditionalInv);
 			}
 			if(row == 4) {
-			    prior =  assimilatingAge(81, 100, 0.5);
+			    prior =  assimilatingAge(41, 50, 0.5);
 			    priorConditional = getDebt(6,  8,   'y')/getDebt(0,  20,   'y');
 			    priorConditionalInv = getDebt(6,  8,   'n')/getDebt(0,  20,   'n');
 				likelihood = (prior*priorConditional)/(prior*priorConditional + priorInv*priorConditionalInv);
@@ -246,8 +246,8 @@ function getDebt(min, max, d){
     var pquery = pobjects.get(0);
 	var rowCount = pquery.getRowCount();
     var colCount = pquery.getColumnCount();
-	var debtIndex = 1;
-	var approvalIndex = colCount-1;
+	var debtIndex = 3;
+	var approvalIndex = 0;
 	var sum = 0;
 	for (var i = 0; i < rowCount; i++) {
 		var approval = pquery.getCell(i, approvalIndex);
@@ -264,8 +264,8 @@ function getAge(min, max, apr){
     var pquery = pobjects.get(0);
 	var rowCount = pquery.getRowCount();
     var colCount = pquery.getColumnCount();
-	var ageIndex = 0;
-	var approvalIndex = colCount-1;
+	var ageIndex = 1;
+	var approvalIndex = 0;
 	var sum = 0;
 	for (var i = 0; i < rowCount; i++) {
 		var approval = pquery.getCell(i, approvalIndex);

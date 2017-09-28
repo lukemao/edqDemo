@@ -169,8 +169,8 @@ function getDebt(min, max, d){
     var pquery = pobjects.get(0);
 	var rowCount = pquery.getRowCount();
     var colCount = pquery.getColumnCount();
-	var debtIndex = 1;
-	var approvalIndex = colCount-1;
+	var debtIndex = 3;
+	var approvalIndex = 0;
 	var sum = 0;
 	for (var i = 0; i < rowCount; i++) {
 		var approval = pquery.getCell(i, approvalIndex);

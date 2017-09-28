@@ -82,29 +82,29 @@ function getCell(row, col) {
         return getManufacturedCell(row, col);
     } else {
 		if(col == 0){
-			if(row == 0) return 'less than 20';
-			if(row == 1) return '21-40';
-			if(row == 2) return '41-60';
-			if(row == 3) return '61-80';
-			if(row == 4) return '81 above';
+			if(row == 0) return 'less than 10';
+			if(row == 1) return '11-20';
+			if(row == 2) return '21-30';
+			if(row == 3) return '31-40';
+			if(row == 4) return '41-50';
 			if(row == 5) return 'total';
 		}
 		// SQL: Select ages from TABLE where APPROVAL='Y' && age>0 && age<20
 		if(col == 1){
-			if(row == 0) return getAge(0,  20,  'y');
-			if(row == 1) return getAge(21, 40,  'y');
-			if(row == 2) return getAge(41, 60,  'y');
-			if(row == 3) return getAge(61, 80,  'y');
-			if(row == 4) return getAge(81, 100, 'y');
-			if(row == 5) return getAge(0,  100, 'y');
+			if(row == 0) return getAge(0,  10,  'y');
+			if(row == 1) return getAge(11, 20,  'y');
+			if(row == 2) return getAge(21, 30,  'y');
+			if(row == 3) return getAge(31, 40,  'y');
+			if(row == 4) return getAge(41, 50,  'y');
+			if(row == 5) return getAge(0,  50,  'y');
 		}
 		if(col == 2){
-			if(row == 0) return getAge(0,  20,  'n');
-			if(row == 1) return getAge(21, 40,  'n');
-			if(row == 2) return getAge(41, 60,  'n');
-			if(row == 3) return getAge(61, 80,  'n');
-			if(row == 4) return getAge(81, 100, 'n');
-			if(row == 5) return getAge(0,  100, 'n');
+			if(row == 0) return getAge(0,  10,  'n');
+			if(row == 1) return getAge(11, 20,  'n');
+			if(row == 2) return getAge(21, 30,  'n');
+			if(row == 3) return getAge(31, 40,  'n');
+			if(row == 4) return getAge(41, 50,  'n');
+			if(row == 5) return getAge(0,  50,  'n');
 		}
         return getViewCell(row, col);
     }
@@ -139,8 +139,8 @@ function getAge(min, max, apr){
     var pquery = pobjects.get(0);
 	var rowCount = pquery.getRowCount();
     var colCount = pquery.getColumnCount();
-	var ageIndex = 0;
-	var approvalIndex = colCount-1;
+	var ageIndex = 1;
+	var approvalIndex = 0;
 	var sum = 0;
 	for (var i = 0; i < rowCount; i++) {
 		var approval = pquery.getCell(i, approvalIndex);
